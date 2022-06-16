@@ -40,3 +40,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'jwt'
 gem 'pg'
+
+gem 'will_paginate', '~> 3.3'

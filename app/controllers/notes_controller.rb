@@ -1,8 +1,11 @@
 class NotesController < ApplicationController
 
 	def index
-    notes = Note.all    
-   	render json: notes, status: :ok  
+    notes = Note.paginate(page: params[:page], per_page: 5)
+   	currrent_url = notes_url(page: params[:page])
+    new_url = notes_url(page: params[:page].to_i + 1)
+    data = {currrent_url: currrent_url, new_url: new_url, notes: notes}
+    render json: data, status: :ok  
   end
 
   def create   
