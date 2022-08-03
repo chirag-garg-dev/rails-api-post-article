@@ -1,11 +1,17 @@
 class NotesController < ApplicationController
 
-	def index
+  def index
     notes = Note.paginate(page: params[:page], per_page: 5)
-   	currrent_url = notes_url(page: params[:page])
-    new_url = notes_url(page: params[:page].to_i + 1)
+    currrent_url = notes_url(page: params[:page])
+    next_url = notes_url(page: params[:page].to_i + 1)
+    prev_url = notes_url(page: params[:page].to_i - 1) if params[:page] != 1 
     data = {currrent_url: currrent_url, new_url: new_url, notes: notes}
     render json: data, status: :ok  
+  end
+ 
+  def show
+     note = Note.find(params[:id])
+     render json: note, status: :ok
   end
 
   def create   
